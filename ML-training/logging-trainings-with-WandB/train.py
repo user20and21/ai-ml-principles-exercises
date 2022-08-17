@@ -1,6 +1,7 @@
 # First we need to import the packages we will be using. We will use numpy
 # for generic matrix operations and tensorflow for deep learning operations
 # such as convolutions, pooling and training (backpropagation).
+import wandb
 import numpy as np
 from tensorflow import keras
 from tensorflow.keras import layers
@@ -54,6 +55,10 @@ def get_mnist_data():
 # this is the format the images in the *MNIST* dataset are. We then create an
 # optimizer and calls the `fit()` method to start the training.
 def train(batch_size, epochs):
+    wandb.init(project="ai-ml-exercise",
+               config={"batch_size": batch_size, "epochs": epochs},
+               settings=wandb.Settings(start_method="fork"))
+
     # Get the training data
     print("Loading the training data...")
     x_train, y_train = get_mnist_data()[0]
@@ -66,8 +71,9 @@ def train(batch_size, epochs):
     model.compile(loss="categorical_crossentropy",
                   optimizer="adam", metrics=["accuracy"])
     model.fit(x_train, y_train, batch_size=batch_size,
-              epochs=epochs, validation_split=0.1)
+              epochs=epochs, validation_split=0.1,
+              callbacks=[wandb.keras.WandbCallback()])
 
 
 if __name__ == "__main__":
-    train(batch_size=128, epochs=15)
+    train(batch_size=128, epochs=10)
