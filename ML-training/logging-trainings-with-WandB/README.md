@@ -41,7 +41,7 @@ python train.py
 ```
 
 ## Run in Google Colab
-Open [Google Colab](https://colab.research.google.com/) in a new tab. In the explorer window, select GitHub and paste the URL to this GitHub repo. Press the `ML-training/logging-trainings-with-WandB/train.ipynb` link and the code should be opened in a new window. You can now run and/or modify the code directly in the browser.
+[Open notebook in Google Colab](https://colab.research.google.com/github/daniel-falk/ai-ml-principles-exercises/blob/main/ML-training/logging-trainings-with-WandB/train.ipynb), or open Colab and in the explorer window, select GitHub and paste the URL to this GitHub repo. Press the `ML-training/logging-trainings-with-WandB/train.ipynb` link and the code should be opened in a new window. You can now run and/or modify the code directly in the browser.
 ![Open the exercise code as a notebook in Colab](images/colab-code.png)
 
 ## Exercises
