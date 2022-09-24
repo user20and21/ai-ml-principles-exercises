@@ -55,7 +55,14 @@ Now go to the Jupyter Notebook again and add a new cell after the normalization 
 x_train_norm *= np.random.random(size=x_train_norm.shape)
 ```
 
-Rerun the full notebook. This should create a new run in Weights and Biases, and this new run should also be picked up by the report (you might need to refresh the page) which will now show both of the runs and a selection table below where you can hide specific runs by clicking the eye icon next to it.
+Rerun the full notebook. This should create a new run in Weights and Biases. Rename the previous run and the current run (in the Weights and Biases workspace) to something describing.
+
+![Rename the runs](images/rename-run.png)
+
+
+The new run should also be picked up by the report (you might need to refresh the page) which will now show both of the runs and a selection table below where you can hide specific runs by clicking the eye icon next to it. We can see that the new run with the added noise has changed the distribution in pixel intensities after preprocessing.
+
+![New run is added to WandB](images/new-run-added.png)
 
 ## Share the report with others
 Finally when you are happy with the report you can share it with others. In the top right corner, click the share button and give people access by email or by clicking the slider to enable public access for anywith with the link.
