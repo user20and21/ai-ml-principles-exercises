@@ -1,0 +1,5 @@
+clearml
+matplotlib
+opencv-python
+numpy
+tensorflow
