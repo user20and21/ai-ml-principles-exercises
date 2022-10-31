@@ -1,6 +1,7 @@
 # First we need to import the packages we will be using. We will use numpy
 # for generic matrix operations and tensorflow for deep learning operations
 # such as convolutions, pooling and training (backpropagation).
+from datetime import datetime
 import pathlib
 import sys
 
@@ -73,15 +74,6 @@ def train(dataset_dir, batch_size, epochs):
     print("Loading the training data...")
     x, y = get_mnist_data(pathlib.Path(dataset_dir))
 
-    #print(x.shape)
-    #print(y.shape)
-
-    #import matplotlib.pyplot as plt
-    #print(y[1000])
-    #plt.imshow(x[1000])
-    #plt.show()
-    #return
-
     # Create a Convolutional Neural Network that
     # expects a 28x28 pixel image with 1 color chanel (gray) as input
     model = create_cnn((28, 28, 1), 10)
@@ -92,10 +84,15 @@ def train(dataset_dir, batch_size, epochs):
             optimizer="adam",
             metrics=["accuracy"]
     )
+
+    logdir = "logs/scalars/" + datetime.now().strftime("%Y%m%d-%H%M%S")
+    tensorboard_callback = keras.callbacks.TensorBoard(log_dir=logdir)
+
     model.fit(
             x, y,
             batch_size=batch_size, epochs=epochs,
-            validation_split=0.1
+            validation_split=0.1,
+            callbacks=[tensorboard_callback],
     )
 
 
