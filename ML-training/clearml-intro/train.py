@@ -1,9 +1,12 @@
 # First we need to import the packages we will be using. We will use numpy
 # for generic matrix operations and tensorflow for deep learning operations
 # such as convolutions, pooling and training (backpropagation).
+from collections import defaultdict
 from datetime import datetime
+import matplotlib.pyplot as plt
 import pathlib
 import sys
+import time
 
 from clearml import Task
 import cv2
@@ -94,6 +97,28 @@ def train(dataset_dir, batch_size, epochs):
             validation_split=0.1,
             callbacks=[tensorboard_callback],
     )
+
+    # Measure the inference time
+    for _ in range(10):  # Avoid cold start..
+        model.predict(x[:32])
+
+    trials = 30  # Average timing over multiple runs
+    all_batch_sizes = 1, 8, 32, 64, 512, 4096
+    time_results = defaultdict(list)
+    for batch_size in all_batch_sizes:
+        for _ in range(trials):
+            t0 = time.process_time()
+            model.predict(x[:batch_size])
+            t1 = time.process_time()
+            time_results[batch_size].append((t1-t0) / batch_size)
+
+    plt.title("Inference time per sample")
+    plt.xlabel("Batch size")
+    plt.ylabel("Inference time [s]")
+    plt.yscale("log")
+    plt.boxplot([time_results[batch_size] for batch_size in all_batch_sizes], labels=all_batch_sizes)
+    plt.show()
+
 
 
 if __name__ == "__main__":
