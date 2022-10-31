@@ -4,6 +4,7 @@
 import pathlib
 import sys
 
+from clearml import Task
 import cv2
 import numpy as np
 from tensorflow import keras
@@ -66,6 +67,8 @@ def get_mnist_data(dataset_path):
 # this is the format the images in the *MNIST* dataset are. We then create an
 # optimizer and calls the `fit()` method to start the training.
 def train(dataset_dir, batch_size, epochs):
+    task = Task.init(project_name='MNIST project', task_name='train')
+
     # Get the training data
     print("Loading the training data...")
     x, y = get_mnist_data(pathlib.Path(dataset_dir))
