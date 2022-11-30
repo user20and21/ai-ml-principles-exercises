@@ -4,6 +4,11 @@ This exercise require you to have an account on the [*Weights and Biases* websit
 
 *Weights and Biases* is an hosted platform to log and visualize metrics from Machine Learning training jobs. This is especially useful when you do multiple trainings, testing different ideas, and you need to compare them or take notes on which training was made with what modifications. The tool itself is an online platform but we will use a *python* library `wandb` to upload the metrics and logs to the platform.
 
+![The WandB user interface](images/wandb.png)
+In this image you can see what the *Weights And Biases* web interface looks like. With a few additional lines of code in our training or evaluation scripts we can upload metrics to the *Weights And Biases* platform that makes it easier to keep track of the experiments we have run. Each time you run the training script there will be a new line created in the WandB interface containing general information about the training run ("experiment") and the metrics we log about it. We can rename the experiments to remember what we did, we can see if the experiment is finished or is still running, we can see who started the experiment and we can log any metrics or parameters that we want.
+
+Since the tool is web based we can be multiple persons cooperating on the same project. Each person can run different experiments and try different parameters, all the runs are logged to the same dashboard regardless which computer it ran on. You can filter the experiments by user if you only want to see your own experiments, you can also sort the experiment by e.g. validation accuracy to find which parameters gave the model with the best accuracy.
+
 ## Add WandB logging code
 We will modify the training code to log the parameters used for the training and the training result using the `wandb` package.
 
@@ -12,12 +17,12 @@ First we need to import the `wandb` package. Add the following line to the top o
 import wandb
 ```
 
-Next we need to tell the `wandb` library to create a new experiment to keep the information about the current training run. We do that by adding a call to the `init` method as the first line in the `train` function. The method takes a project name as argument, the project name is used to group multiple runs from the same project together. We also gives the function a dictionary called `config`, this is parameters that affects the training that will be logged by *Weights and Biases*.
+Next we need to tell the `wandb` library to create a new experiment to keep the information about the current training run. We do that by adding a call to the `init` method as the first line in the `train` function. The method takes a project name as argument, the project name is used to group multiple runs from the same project together. We also gives the function a dictionary called `config`, this is parameters that affects the training that will be logged by *Weights and Biases*. These parameters can be essentially whatever we like and they will be visible in the tables as seen in the first image above. Good practice is to log everything that affects the training, including random states, so that the exact same result can be reproduced by rerunning a training job with the same parameters.
 ```
 wandb.init(project="ai-ml-exercise", config={"batch_size": batch_size, "epochs": epochs})
 ```
 
-Finally, the `wandb` library needs to be called during the training to log the progress and metrics. Since the model we are training is using the `Keras` library, we can make use of the `wandb.keras.WandbCallback` class to automatically log a lot of interesting information about our training. In the `model.fit()` call, add the key-value argument `callbacks=[wandb.keras.WandbCallback()]`. The full line should thus be:
+The parameters we logged with the `init` mehod above will only be logged once for the whole training job. Some metrics that we want to log, to later visualize in plots or charts, are changing each training epoch (iteration). These can be logged with the `wandb.log` method. Since the model we are training is using the *Keras* library, we can make use of the `wandb.keras.WandbCallback` class to automatically log a lot of interesting information about our training. In the `model.fit()` call, add the key-value argument `callbacks=[wandb.keras.WandbCallback()]`, this will make sure that the *Weights and Biases* logging function is called each epoch by the *Keras* library with the latest metric values. The full line should thus be:
 ```
 model.fit(x_train, y_train, batch_size=batch_size,
           epochs=epochs, validation_split=0.1,
@@ -41,7 +46,7 @@ python train.py
 ```
 
 ## Run in Google Colab
-[Open notebook in Google Colab](https://colab.research.google.com/github/daniel-falk/ai-ml-principles-exercises/blob/main/ML-training/logging-trainings-with-WandB/train.ipynb), or open Colab and in the explorer window, select GitHub and paste the URL to this GitHub repo. Press the `ML-training/logging-trainings-with-WandB/train.ipynb` link and the code should be opened in a new window. You can now run and/or modify the code directly in the browser.
+[Open the notebook in Google Colab](https://colab.research.google.com/github/daniel-falk/ai-ml-principles-exercises/blob/main/ML-training/logging-trainings-with-WandB/train.ipynb), or open Google Colab and in the web browser, select GitHub and paste the URL to this GitHub repo. Press the `ML-training/logging-trainings-with-WandB/train.ipynb` link and the code should be opened in a new window. You can now run and/or modify the code directly in the browser.
 ![Open the exercise code as a notebook in Colab](images/colab-code.png)
 
 ## Exercises
