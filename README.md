@@ -14,3 +14,6 @@ An overview of the current exercises are:
 - `ML-training/logging-trainings-with-WandB` [INTERMEDIATE]: Getting started with experiment tracking in `Weights and Biases`
 - `ML-training/creating-reports-with-WandB` [INTERMEDIATE]: Writing interactive experiment reports with `Weights and Biases`
 - `ML-training/activeloop-deeplake` [INTERMEDIATE]: Getting started with `ActiveLoop` for data exploration and visualization
+
+## AutoML and APIs
+- `ML-inference/ML-APIs/aws_rekognition.ipynb` [ADVANCED]: Using the AWS Rekognition APIs for object detection and face based demographics

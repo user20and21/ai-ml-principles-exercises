@@ -1,0 +1,12 @@
+# Intro to common libraries in machine learning
+This directory contains a set of example notebooks presenting different python libraries that are helpful and commonly used in the implementation and training of machine learning algorithms.
+
+Play around with the code in the different notebooks and make sure that you have a highlevel understanding for how and why the library is used. The recommended order to try the notebooks is:
+
+* Try out the benchmarking code in `benchmarking_and_numba.ipynb` and make sure that you understand how to measure how fast or slow code is. You do not need to understand the usage of the `numba` library since this is complex and therefore not very frequently used, the example is instead there to show how extreme difference it can be on the execution time for fast vs. slow python code. A common misconception is that python is too slow to use in production, but this is mostly the case when it is written by someone who does not understand how to best make use of the language.
+* Next, take a look at the ` intro_to_numpy.ipynb` example to see how the `numpy` library can make mathematical operations and linear algebra both faster and easier.
+* After this, you can look at the ` intro_to_pandas.ipynb` notebook to see why the `pandas` library is mostly used when working with tabular data.
+* If you are working with Computer Vision and images, you will likely work with the `opencv` library instead. You find examples of this in the ` intro_to_opencv.ipynb` notebook.
+* When it comes to visualizing your results, a common library to use is `matplotlib` which you can find examples from in the ` intro_to_matplotlib_pyplot.ipynb` file.
+* Simple machine learning and the first experiments you do when you get a new machine learning project will likely use `scikit-learn` which you can learn more about in the `intro_to_sklearn.ipynb` notebook.
+* When you are ready to dive into deep learning you can make use of the `tensorflow` library. Most data scientists use `tensorflow` with the high-level API called `Keras`. You can find examples of this in the `intro_to_tensorflow_keras.ipynb` file. Mostly as a reference to how the low-level API in `tensorflow` looks like, you can look at the code in `intro_to_tensorflow_low_level.ipynb`. This later example is however rather complex and there is no need for a beginner in machine learning to understand it at this point.
