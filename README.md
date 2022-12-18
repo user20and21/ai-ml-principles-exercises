@@ -16,4 +16,5 @@ An overview of the current exercises are:
 - `ML-training/activeloop-deeplake` [INTERMEDIATE]: Getting started with `ActiveLoop` for data exploration and visualization
 
 ## AutoML and APIs
+- `ML-inference/ML-APIs/openai_dall_e.ipynb` [EASY]: Using the OpenAI DALL-E API to generate images from text descriptions
 - `ML-inference/ML-APIs/aws_rekognition.ipynb` [ADVANCED]: Using the AWS Rekognition APIs for object detection and face based demographics
